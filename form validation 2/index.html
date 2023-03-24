@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+  <header> 
+    <h1>Test javascript Form Validation </h1></header>
+  
+	<style>
+		label {
+			display: block;
+			margin-top: 10px;
+		}
+		input[type="text"], input[type="password"], select {
+			width: 20%;
+			padding: 5px;
+			margin-top: 5px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		input[type="submit"]:hover {
+			background-color: #45a049;
+		}
+		.error {
+			color: red;
+			font-size: 12px;
+			margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+  
+	<form name="myForm" onsubmit="return validateForm()" action="#" method="post">
+		<label for="name">Name</label>
+		<input type="text" id="name" name="name">
+		<span id="nameError"></span><br><br>
+
+		<label for="address">Address</label>
+		<textarea id="address" name="address"></textarea>
+		<span id="addressError"></span><br><br>
+
+		<label for="zip">Zip Code</label>
+		<input type="text" id="zip" name="zip">
+		<span id="zipError"></span><br><br>
+
+		<label for="country">Country</label>
+		<select id="country" name="country">
+			<option value="">Please select...</option>
+			<option value="usa">USA</option>
+			<option value="canada">Canada</option>
+			<option value="mexico">Mexico</option>
+		</select>
+		<span id="countryError"></span><br><br>
+
+		<label>Gender</label>
+		<input type="radio" id="male" name="gender" value="male">
+		<label for="male">Male</label>
+		<input type="radio" id="female" name="gender" value="female">
+		<label for="female">Female</label>
+		<span id="genderError"></span><br><br>
+
+		<label>Preferences</label>
+		<input type="checkbox" id="red" name="preferences[]" value="red">
+		<label for="red">Red</label>
+		<input type="checkbox" id="green" name="preferences[]" value="green">
+		<label for="green">Green</label>
+		<input type="checkbox" id="blue" name="preferences[]" value="blue">
+		<label for="blue">Blue</label>
+		<span id="preferencesError"></span><br><br>
+
+		<label for="phone">Phone</label>
+		<input type="text" id="phone" name="phone">
+		<span id="phoneError"></span><br><br>
+
+		<label for="email">Email</label>
+		<input type="text" id="email" name="email">
+		<span id="emailError"></span><br><br>
+
+		<label for="password">Password (6-8 characters)</label>
+		<input type="password" id="password" name="password">
+		<span id="passwordError"></span><br><br>
+
+		<label for="verifyPassword">Verify Password</label>
+		<input type="password" id="verifyPassword" name="verifyPassword">
+		<span id="verifyPasswordError"></span><br><br>
+
+		<input type="submit" value="SEND">
+		<input type="reset" value="CLEAR">
+	</form>
+</container>
+
+	<script>
+		function validateForm() {
+    const name = document.getElementById('name');
+    const address = document.getElementById('address');
+    const zip = document.getElementById('zip');
+    const country = document.getElementById('country');
+    const gender = document.getElementsByName('gender');
+    const preferences = document.getElementsByName('preferences');
+    const phone = document.getElementById('phone');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const verifyPassword = document.getElementById('verify-password');
+    
+    // Validate the name field
+    if (name.value === '') {
+      alert('Please enter your name!');
+      name.focus();
+      return false;
+    }
+    
+    // Validate the address field
+    if (address.value === '') {
+      alert('Please enter your address!');
+      address.focus();
+      return false;
+    }
+    
+    // Validate the zip code field
+    if (zip.value === '') {
+      alert('Please enter your zip code!');
+      zip.focus();
+      return false;
+    }
+    
+    // Validate the country field
+    if (country.value === '') {
+      alert('Please select your country!');
+      country.focus();
+      return false;
+    }
+    
+    // Validate the gender field
+    let genderSelected = false;
+    for (let i = 0; i < gender.length; i++) {
+      if (gender[i].checked) {
+        genderSelected = true;
+        break;
+      }
+    }
+    if (!genderSelected) {
+      alert('Please select your gender!');
+      return false;
+    }
+    
+    // Validate the preferences field
+    let preferencesSelected = false;
+    for (let i = 0; i < preferences.length; i++) {
+      if (preferences[i].checked) {
+        preferencesSelected = true;
+        break;
+      }
+    }
+    if (!preferencesSelected) {
+      alert('Please select at least one preference!');
+      return false;
+    }
+    
+    // Validate the phone field
+    if (phone.value === '') {
+      alert('Please enter your phone number!');
+      phone.focus();
+      return false;
+    }
+    
+    // Validate the email field
+    if (email.value === '') {
+      alert('Please enter your email address!');
+      email.focus();
+      return false;
+    }
+    
+    // Validate the password field
+    if (password.value === '') {
+      alert('Please enter a password!');
+      password.focus();
+      return false;
+    }
+    
+    // Validate the verify password field
+    if (verifyPassword.value === '') {
+      alert('Please verify your password!');
+      verifyPassword.focus();
+      return false;
+    }
+    
+    if (password.value !== verifyPassword.value) {
+      alert('The passwords do not match!');
+      verifyPassword.focus();
+      return false;
+    }
+    
+    // If all the fields are valid, submit the form
+    alert('Form submitted successfully!');
+    return true;
+  }
+  
